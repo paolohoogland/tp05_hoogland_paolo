@@ -1,0 +1,8 @@
+<h1>Catalogue des produits</h1>
+
+<div *ngFor="let produit of produits$ | async" class="produit-card">
+  <h2>{{ produit.product }}</h2>
+  <p>{{ produit.description }}</p>
+  <p>Price: {{ produit.price }} {{ produit.unit }}</p>
+  <button (click)="ajouterAuPanier(produit)">Ajouter au panier</button>
+</div>

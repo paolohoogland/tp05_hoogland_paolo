@@ -12,7 +12,7 @@ export class ProduitService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Produit[]> {
+  getProduits(): Observable<Produit[]> {
     return this.http.get<Produit[]>(this.backendUrl);
   }
 }
