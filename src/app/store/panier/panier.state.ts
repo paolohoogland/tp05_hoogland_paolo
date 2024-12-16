@@ -38,9 +38,10 @@ export class PanierState {
   @Action(AjouterAuPanier)
   ajouterAuPanier(ctx: StateContext<PanierStateModel>, action: AjouterAuPanier) {  
     const state = ctx.getState();
+    const newProduct = { ...action.payload, id: this.generateUniqueId() };
     ctx.setState({
       ...state,
-      panier: [...state.panier, action.payload]  
+      panier: [...state.panier, newProduct]  
     });
   }
 
@@ -49,7 +50,11 @@ export class PanierState {
     const state = ctx.getState();
     ctx.setState({
       ...state,
-      panier: state.panier.filter(produit => produit.product !== action.produitId) 
+      panier: state.panier.filter(produit => produit.id !== action.produitId)
     });
+  }
+
+  private generateUniqueId(): string {
+    return Math.random().toString(36).substring(2, 10);
   }
 }

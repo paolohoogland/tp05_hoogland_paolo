@@ -1,8 +1,10 @@
-<h1>Catalogue des produits</h1>
-<p>Nombre de produits: {{ (produits$ | async)?.length }}</p>
-<div *ngFor="let produit of produits$ | async" class="produit-card">
-  <h2>{{ produit.product }}</h2>
-  <p>{{ produit.description }}</p>
-  <p>Price: {{ produit.price }} {{ produit.unit }}</p>
-  <button (click)="ajouterAuPanier(produit)">Ajouter au panier</button>
+<h1>Catalogue des Produits</h1>
+
+<p>{{ (produits$ | async)?.length }} produits</p>
+<div *ngIf="(produits$ | async) as produits">
+  <div *ngFor="let produit of produits" class="produit-card">
+    <p>{{ produit.product }} - {{ produit.price | currency }}</p>
+    <p>{{ produit.description }}</p>
+    <button (click)="ajouterAuPanier(produit)">Ajouter au Panier</button>
+  </div>
 </div>
