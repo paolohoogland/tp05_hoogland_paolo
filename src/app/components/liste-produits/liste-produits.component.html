@@ -1,5 +1,5 @@
 <h1>Catalogue des produits</h1>
-
+<p>Nombre de produits: {{ (produits$ | async)?.length }}</p>
 <div *ngFor="let produit of produits$ | async" class="produit-card">
   <h2>{{ produit.product }}</h2>
   <p>{{ produit.description }}</p>

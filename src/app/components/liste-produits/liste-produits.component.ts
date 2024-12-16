@@ -15,11 +15,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ListeProduitsComponent implements OnInit {
 
-  @Select(ProduitsState.getProduits) produits$!: Observable<Produit[]>;
+  produits$!: Observable<Produit[]>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.produits$ = this.store.select(ProduitsState.getProduits);
     this.store.dispatch(new LoadProduits());
   }
 

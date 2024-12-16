@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { PanierState } from '../../store/panier/panier.state';
 import { CommonModule } from '@angular/common'; 
@@ -11,6 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./header.component.css'],
   imports: [CommonModule]  
 })
-export class HeaderComponent {
-  @Select(PanierState.getNbProduits) nbProduits$!: Observable<number>;
+export class HeaderComponent implements OnInit {
+  nbProduits$!: Observable<number>;
+
+  constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    this.nbProduits$ = this.store.select(PanierState.getNbProduits);
+  }
 }

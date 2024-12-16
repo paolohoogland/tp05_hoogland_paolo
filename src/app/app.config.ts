@@ -1,9 +1,17 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store'; 
+import { ApplicationConfig, importProvidersFrom } from '@angular/core'; 
+import { ProduitsState } from './store/produits/produits.state'; 
+import { PanierState } from './store/panier/panier.state'; 
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
+import { ProduitService } from './produit.service';
 
-export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration()]
+export const appConfig : ApplicationConfig = {
+  providers: [
+    provideHttpClient(),
+    provideRouter(routes),
+    ProduitService,
+    importProvidersFrom(NgxsModule.forRoot([ProduitsState, PanierState]))
+  ]
 };
